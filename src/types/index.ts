@@ -58,7 +58,7 @@ export const SITE_SEO_DEFAULTS: PublicSiteSeo = {
   og_title: 'Visily Studio | Premium Digital Experiences',
   og_description: 'We design and build beautiful, high-performance digital products.',
   og_image_url: '/og-image.jpg',
-  favicon_url: '/favicon.ico',
+  favicon_url: '/favicon.jpg',
 };
 
 export type SiteControls = {

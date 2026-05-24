@@ -34,7 +34,8 @@ export async function generateMetadata(): Promise<Metadata> {
     title: seo.site_title,
     description: seo.meta_description,
     icons: {
-      icon: seo.favicon_url,
+      icon: [{ url: "/favicon.ico", sizes: "any" }],
+      apple: [{ url: "/favicon.ico" }],
     },
     openGraph: {
       title: seo.og_title,
