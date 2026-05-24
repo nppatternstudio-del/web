@@ -11,7 +11,18 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Mail, CheckCircle2, AlertCircle } from 'lucide-react';
+import FaviconField from '@/components/admin/FaviconField';
 import ImageUploadField from '@/components/admin/ImageUploadField';
+
+const siteHostname = (() => {
+  try {
+    const url = process.env.NEXT_PUBLIC_SITE_URL;
+    if (url) return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    /* ignore invalid URL */
+  }
+  return 'yoursite.com';
+})();
 
 const defaultFooterNav: FooterNavLink[] = [
   { href: '/about', label: 'About' },
@@ -266,8 +277,7 @@ export default function SettingsPage() {
             hint="Used for social sharing previews (Facebook, WhatsApp, etc.). Stored as base64 in the database."
             previewAspect="max-h-40 w-full"
           />
-          <ImageUploadField
-            label="Favicon"
+          <FaviconField
             value={settings.contact_info?.seo?.favicon_url ?? ''}
             onChange={v =>
               setSettings({
@@ -278,8 +288,8 @@ export default function SettingsPage() {
                 },
               })
             }
-            hint="Shown in browser tab. Upload a square PNG or ICO. Stored as base64 in the database."
-            previewAspect="max-h-20 w-full"
+            siteTitle={settings.contact_info?.seo?.site_title ?? SITE_SEO_DEFAULTS.site_title}
+            siteUrl={siteHostname}
           />
           <Button onClick={save} className="w-full sm:w-auto">
             Save SEO and branding
